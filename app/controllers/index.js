@@ -12,16 +12,32 @@ var url = "https://www.quandl.com/api/v3/datatables/WIKI/PRICES.json?ticker=" + 
 var drawGraph = function(url){
 
 //This method should take cleaned data
-var drawG = function(data){
+var drawG = function(data, stockCode){
 d3.select('chart')
 .selectAll("g")
 .data(data)
 .enter()
+.attr("class", stockCode)
 .attr("transform", function(d){return "translate(" + d.date + "," + d.price + ")"})
 }
 
 //Circles get drawn after G
-var drawCircle = function(){}
+var drawCircle = function(stockCode){
+d3.selectAll("g ." + stockCode)
+.append("circle")
+.attr("r", 2)
+.style("fill", "black")
+.style("stroke", "black")
+.style("stroke-width", "1px")
+}
+
+var drawBottomAxis = function() {
+
+}
+
+var drawRightAxis = function() {
+
+}
 
 }
 
