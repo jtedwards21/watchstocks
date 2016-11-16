@@ -5,16 +5,40 @@ var ticker = "AAPL"
 var date = "20160912"
 var url = "https://www.quandl.com/api/v3/datatables/WIKI/PRICES.json?ticker=" + ticker + "&date=" + date + "&api_key=" + apiKey
 
-//Create React Classes and Initialize State for the widgets at the bottom
+//d3 Methods
 
 
+//I can just test this method through the console
+var drawGraph = function(url){
+
+//This method should take cleaned data
+var drawG = function(data){
+d3.select('chart')
+.selectAll("g")
+.data(data)
+.enter()
+.attr("transform", function(d){return "translate(" + d.date + "," + d.price + ")"})
+}
+
+//Circles get drawn after G
+var drawCircle = function(){}
+
+}
 
 
 //This class will be wrong, because it doesn't contain a widget for the ticker at the top
 var WidgetContainer = React.createClass({
-render(){
 
+render(){
 return <TickerWidget />
+}
+})
+
+var DisplayWidget = React.createClass({
+render(){
+return(
+<svg className="chart"></svg>
+)
 }
 })
 
