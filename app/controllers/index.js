@@ -7,6 +7,7 @@ var margins = {
 "bottom" = 5
 }
 
+//It would be great if these values were exported
 var starterStocks = ["AAPL", "GOOG"]
 
 var width = 1000 - margins.left - margins.right
@@ -69,7 +70,8 @@ var xScale = d3.scaleLinear().domain([minDate, maxDate]).range([0, width])
 var xAxis = d3.axisBottom().scale(xScale).tickSize(0)
 d3.select("chart").append("g").attr("id", "xAxisG").attr("transform", "translate(0," + height + ")").call(xAxis);
 
-//This yScale is not useable, I might have to do something from the S&P and then some sort of percentage like they do
+//I'll just do share in US Dollars
+//So, I'll have to do dynamic resizing
 var yScale = d3.scaleLinear().domain([0, maxPrice]).range([0, height])
 var yAxis = d3.axisRight().scale(yScale).tickSize(0)
 d3.select("chart").append("g").attr("id", "yAxisG").attr("transform", "translate(-10,0)").call(yAxis)
@@ -79,26 +81,32 @@ return data
 
 
 
+
 //REACT
 //This container also handles drawing at the top of the page
 var WidgetContainer = React.createClass({
 getInitialState(){
-return {stocks: ["AAPL"]}
+return {stocks: this.props.stocks, maxPrice: 0}
 },
 componentDidMount(){
 d3.select("chart")
-.attr("width", width)
-.attr("height". height);
+.attr("width", this.props.width)
+.attr("height". this.props.height);
+//Draw from the starterStocks
+//Check for highest Price and Update a marker
+for (
+
 },
 render(){
-return <TickerWidget />
+//Return a ticker Widget for each starterStock
+return <TickerWidget /> <SelectorWidget />
 }
 })
 
 var TickerWidget = React.createClass({
 render(){
 return(
-<div className="ticker-widget">
+<div className="ticker-widget sub-widget">
 <div className="ticker-name">MSFT</div>
 <div className="close-button">x</div>
 <div className="stock-info">Lipsum Orum</div>
@@ -107,10 +115,10 @@ return(
 }
 })
 
-var SelectorWidger = React.createClass({
+var SelectorWidget = React.createClass({
 render(){
 return(
-<div className="selector-widget">
+<div className="selector-widget sub-widget">
 <div className="select-title">Syncs in realtime across clients</div>
 <form className="search-form">
 <div className="input-group">
@@ -124,7 +132,8 @@ return(
 }
 })
 
+//Lets put the props in here
 ReactDOM.render(
-<WidgetContainer />,
+<WidgetContainer className="widget-container" url={url} width={width} height={height} stocks={starterStocks}/>,
 document.getElementById('content')
 )
