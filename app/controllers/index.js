@@ -1,3 +1,5 @@
+
+
 var apiKey = "KUytvHxeZzXQzvSzJkrC"
 var ticker = "AAPL"
 var date = "20160912"
@@ -11,7 +13,8 @@ var url = "https://www.quandl.com/api/v3/datatables/WIKI/PRICES.json?ticker=" + 
 //This class will be wrong, because it doesn't contain a widget for the ticker at the top
 var WidgetContainer = React.createClass({
 render(){
-return {<TickerWidget /> <TickerWidget /> <TickerWidget />}
+
+return <TickerWidget />
 }
 })
 
@@ -34,12 +37,17 @@ return(
 <div className="select-title">Syncs in realtime across clients</div>
 <form className="search-form">
 <div className="input-group">
-<input placeholder="Stock code">
+<input placeholder="Stock code"　/>
 <button>Add</button>
 </div>
 </form>
 <div className="search-error-message"></div>
 </div>
-)
+)　
 }
 })
+
+ReactDOM.render(
+<WidgetContainer />,
+document.getElementById('content')
+)
