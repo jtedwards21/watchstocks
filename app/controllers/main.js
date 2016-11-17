@@ -1,5 +1,3 @@
 import WidgetContainer from './index.js'
 import TickerWidget from './index.js'
 import SelectorWidget from './index.js'
-import Chart from './chart.js'
-import defaultValues from './defaultValues.js'

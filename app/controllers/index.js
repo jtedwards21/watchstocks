@@ -1,17 +1,22 @@
-
+var Chart = require('./../../public/lib/chart')
+var defaultValues = require('./../../public/lib/chart')
+//THere's nothing coming up in the development server for some reason.
 
 var WidgetContainer = React.createClass({
 getInitialState(){
 return {stocks: this.props.stocks, maxPrice: 0}
 },
 componentDidMount(){
-d3.select("chart")
+console.log(this.props)
+d3.select("#chart")
 .attr("width", this.props.width)
 .attr("height". this.props.height);
+console.log(this.props.height)
 //Draw from the starterStocks
 //Check for highest Price and Update a marker
-for(var i = 0; i < this.props.length; i++){
+for(var i = 0; i < this.props.stocks.length; i++){
 url = makeUrl(this.props.stocks[i], this.props.startDate, this.props.endDate, this.props.apiKey)
+console.log(url)
 d3.json(url, function(data){
 data = data.datatable;
 //Now What Needs to Happen is that the x and y axis need to get pulled into their own methods
@@ -62,6 +67,6 @@ return(
 
 //Lets put the props in here
 ReactDOM.render(
-<WidgetContainer className="widget-container" apiKey={apiKey} startDate={defaultStartDate} endDate={defaultEndDate} url={url} width={width} height={height} stocks={starterStocks}/>,
+<WidgetContainer className="widget-container" apiKey={defaultValues.apiKey} startDate={defaultValues.startDate} endDate={defaultValues.endDate} width={defaultValues.width} height={defaultValues.height} stocks={defaultValues.starterStocks}/>,
 document.getElementById('content')
 )
